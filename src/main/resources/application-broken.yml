@@ -1,0 +1,2 @@
+# Intentionally empty — no fragmentation configuration.
+# This profile exists for Spring context isolation in tests.

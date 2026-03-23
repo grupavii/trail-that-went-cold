@@ -1,0 +1,4 @@
+spring:
+  rsocket:
+    server:
+      fragment-size: 1MB
