@@ -1,6 +1,6 @@
 # The Trail That Went Cold — RSocket Fragmentation Demo
 
-Companion project for [The Trail That Went Cold](https://grupavii.eu/blog/trail-that-went-cold) blog post. Reproduces a production bug where Spring Boot's RSocket fragmentation configuration is silently ignored when using WebSocket transport.
+Companion project for [The Trail That Went Cold](https://grupavii.eu/blog/the-trail-that-went-cold/) blog post. Reproduces a production bug where Spring Boot's RSocket fragmentation configuration is silently ignored when using WebSocket transport.
 
 ## The Bug
 
