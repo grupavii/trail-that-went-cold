@@ -1,11 +1,12 @@
 package com.grupavii.trackthatwentcold
 
 import com.grupavii.trackthatwentcold.client.DataStreamClient
-import com.grupavii.trackthatwentcold.service.BatchAggregator
+import com.grupavii.trackthatwentcold.model.DataPoint
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
+import org.springframework.core.ParameterizedTypeReference
 import org.springframework.messaging.rsocket.RSocketRequester
 import org.springframework.test.context.ActiveProfiles
 import reactor.test.StepVerifier
@@ -25,14 +26,12 @@ class FixedProfileTest {
         val transport = DataStreamClient.createTransport(port)
         val requester = requesterBuilder.transport(transport)
 
-        val batch = BatchAggregator().generateBatch()
-
         StepVerifier.create(
             requester.route("data.stream")
-                .data(batch)
-                .retrieveMono(String::class.java)
+                .data(20_000)
+                .retrieveMono(object : ParameterizedTypeReference<List<DataPoint>>() {})
         )
-            .expectNext("Received ${batch.size} data points")
+            .expectNextMatches { it.size == 20_000 }
             .verifyComplete()
     }
 }

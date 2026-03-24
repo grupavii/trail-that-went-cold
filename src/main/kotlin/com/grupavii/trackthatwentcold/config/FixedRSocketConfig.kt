@@ -19,8 +19,5 @@ class FixedRSocketConfig {
         server.fragment(FRAGMENT_SIZE)
     }
 
-    @Bean
-    fun rSocketConnectorConfigurer() = RSocketConnectorConfigurer { connector ->
-        connector.fragment(FRAGMENT_SIZE)
-    }
+
 }

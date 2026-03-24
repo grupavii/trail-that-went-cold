@@ -1,7 +1,6 @@
 package com.grupavii.trackthatwentcold.controller
 
 import com.grupavii.trackthatwentcold.client.DataStreamClient
-import com.grupavii.trackthatwentcold.service.BatchAggregator
 import org.springframework.core.env.Environment
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController
@@ -10,7 +9,6 @@ import reactor.core.publisher.Mono
 @RestController
 class TriggerController(
     private val client: DataStreamClient,
-    private val aggregator: BatchAggregator,
     private val environment: Environment
 ) {
 
@@ -18,7 +16,7 @@ class TriggerController(
     fun triggerBatch(): Mono<String> {
         val port = environment.getProperty("local.server.port")?.toInt()
             ?: throw IllegalStateException("Server port not available")
-        val batch = aggregator.generateBatch()
-        return client.sendBatch(port, batch)
+        return client.requestBatch(port)
+            .map { batch -> "Received ${batch.size} data points" }
     }
 }

@@ -35,10 +35,10 @@ The project uses three Spring profiles to demonstrate each stage of the debuggin
 
 Runs all three profile tests plus a small-batch baseline:
 
-- **BrokenProfileTest** — sends ~20MB batch, expects RSocket error
-- **YamlFixProfileTest** — sends ~20MB batch, expects same error despite YAML config
-- **FixedProfileTest** — sends ~20MB batch, expects success
-- **SmallBatchTest** — sends 5 records, succeeds without fragmentation
+- **BrokenProfileTest** — requests 20K-record batch from server, expects RSocket error
+- **YamlFixProfileTest** — requests 20K-record batch, expects same error despite YAML config
+- **FixedProfileTest** — requests 20K-record batch, expects 20K data points returned
+- **SmallBatchTest** — requests 5 records, succeeds without fragmentation
 
 ### Manual exploration
 
